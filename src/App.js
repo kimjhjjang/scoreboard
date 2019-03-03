@@ -2,6 +2,7 @@ import React from "react";
 import './App.css';
 import {Header} from "./components/Header";
 import {Player} from "./components/Player";
+import {AddPlayerForm} from "./components/AddPlayerForm";
 
 
 class App extends React.Component {
@@ -34,10 +35,32 @@ class App extends React.Component {
     }));
   }
 
+  //플레이어 추가하는 메서드
+  handleAddPlayer = (name) =>{
+    console.log(name);
+    // player id 최대값 찾기
+    let maxId = 0;
+    this.state.players.forEach(item => {
+      if(item.id>maxId){
+        maxId = item.id;
+      }
+    });
+
+    // 추가 상태 변경
+    this.setState({
+      players: [
+        ...this.state.players,
+        {id: maxId +1, name, score: 0}
+      ]
+    });
+
+  }
+
+
   render() {
     return (
       <div className="scoreboard">
-        <Header title="My Scoreboard" totalPlayers={this.state.players.length}/>
+        <Header title="My scoreboard" players={this.state.players} />
 
         {
           this.state.players.map(player =>
@@ -46,6 +69,7 @@ class App extends React.Component {
                     removePlayer={this.handleRemovePlayer}
                     changeScore={this.handleChangeScore}/>)
         }
+        <AddPlayerForm addPlayer={this.handleAddPlayer}/>
       </div>
     )
   }
