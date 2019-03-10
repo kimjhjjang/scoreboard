@@ -2,30 +2,24 @@ import React from "react";
 
 
 export class AddPlayerForm extends React.Component {
-  constructor(props) {
-    super(props);  // 부모 속성 초기화해야됨.
-    this.state = {
-      playerName :''
-    }
-  }
 
-  handleValueChange = (e) =>{
-    this.setState({playerName: e.target.value});
-  }
+  textInput = React.createRef();
+
 
   handleSubmit = (e) =>{
+    console.log(e);
     e.preventDefault(); // submit에 기본 동작을 차단.
-    this.props.addPlayer(this.state.playerName);
+    this.props.addPlayer(this.textInput.current.value);
     // form 초기화
-    this.setState({playerName :''});
+    // this.setState({playerName :''});
+    e.currentTarget.reset();
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" value={this.state.playerName}
+        <input type="text" ref={this.textInput}
         placeholder="enter a player's name"
-        onChange={this.handleValueChange}
         required
         />
         <input type="submit" value="Add Player"/>

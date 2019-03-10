@@ -1,11 +1,18 @@
 import React from "react";
 import {Counter} from "./Counter";
+import PropTypes from 'prop-types';
 
 export class Player extends React.Component {
 
-  render() {
-    console.log(this.props.name, 'rendered');
+  static propTypes = {
+    removePlayer: PropTypes.func,
+    name: PropTypes.string.isRequired,
+    score:PropTypes.number.isRequired,
+    id:PropTypes.number,
+    changeScore: PropTypes.func
+  }
 
+  render() {
     //객체 분해 할당
     const {removePlayer,name,score,id,changeScore} = this.props;
 
@@ -24,11 +31,11 @@ export class Player extends React.Component {
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    console.log('componentWillReceiveProps : ', nextProps );
+    //console.log('componentWillReceiveProps : ', nextProps );
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    console.log(nextProps);
+    //console.log(nextProps);
     return nextProps.score !== this.props.score;
   }
 };
