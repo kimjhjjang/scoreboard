@@ -1,7 +1,9 @@
 import React from "react";
+import {addPlayer} from "../redux/actions";
+import {connect} from "react-redux";
 
 
-export class AddPlayerForm extends React.Component {
+class AddPlayerForm extends React.Component {
 
   textInput = React.createRef();
 
@@ -27,3 +29,5 @@ export class AddPlayerForm extends React.Component {
     );
   }
 }
+
+export default connect(null,{addPlayer})(AddPlayerForm);

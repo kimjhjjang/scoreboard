@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
+import {changeScore} from "../redux/actions";
 
 
-export class Counter extends React.Component {
-  constructor(props) {
-    super(props);  // 부모 속성 초기화해야됨.
-  }
+class Counter extends React.Component {
+
 
   render() {
     const {id, score, changeScore} = this.props;
@@ -29,3 +29,6 @@ Counter.propTypes ={
   score : PropTypes.number,
   changeScore : PropTypes.func
 }
+
+
+export default connect(null,{changeScore})(Counter);
