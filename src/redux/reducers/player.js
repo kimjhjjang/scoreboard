@@ -1,3 +1,5 @@
+import {UPDATE_TITLE} from "../actionTypes";
+
 const initialState ={
   title : 'Redux Score',
   players: [
@@ -9,5 +11,13 @@ const initialState ={
 }
 
 export const playerReducer = (state = initialState, action) =>{
-  return state;
+  switch (action.type) {
+    case  UPDATE_TITLE:
+      return {
+        ...state,
+        title: action.title
+      }
+    default:
+      return state;
+  }
 }

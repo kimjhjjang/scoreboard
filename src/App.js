@@ -1,9 +1,8 @@
 import React from "react";
 import './App.css';
-import {Header} from "./components/Header";
+import Header from "./components/Header";
 import {Player} from "./components/Player";
 import {AddPlayerForm} from "./components/AddPlayerForm";
-
 
 class App extends React.Component {
   state = {
@@ -22,12 +21,12 @@ class App extends React.Component {
     }))
   }
 
-  //증가 혹은 감소하는 핸들러 메서드
+  // 증가 혹은 감소하는 핸들러 메서드
   handleChangeScore = (id, delta) => {
-    console.log(id,delta);
+    console.log(id, delta);
     this.setState(prevState => ({
-      players: prevState.players.map(item =>{
-        if(item.id === id){
+      players: prevState.players.map(item => {
+        if (item.id === id) {
           item.score = item.score + delta;
         }
         return item;
@@ -35,33 +34,31 @@ class App extends React.Component {
     }));
   }
 
-  //플레이어 추가하는 메서드
-  handleAddPlayer = (name) =>{
+  // 플레이어 추가하는 메서드
+  handleAddPlayer = (name) => {
     console.log(name);
     // player id 최대값 찾기
     let maxId = 0;
     this.state.players.forEach(item => {
-      if(item.id>maxId){
+      if (item.id > maxId) {
         maxId = item.id;
       }
     });
-
-    // 추가 상태 변경
+    // 추가
     this.setState({
       players: [
         ...this.state.players,
-        {id: maxId +1, name, score: 0}
+        {id: maxId + 1, name, score: 0}
       ]
-    });
-
+    })
   }
-
 
   render() {
     return (
       <div className="scoreboard">
-        <Header title="My scoreboard" players={this.state.players} />
+        <Header players={this.state.players} />
 
+        {/*Players List*/}
         {
           this.state.players.map(player =>
             <Player name={player.name} id={player.id} key={player.id}

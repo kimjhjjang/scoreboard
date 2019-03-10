@@ -1,41 +1,39 @@
 import React from "react";
 
-
 export class StopWatch extends React.Component {
-
-  tickRef = '';
+  tickRef;
 
   state = {
-    isRunning : false,
-    timer : 0
+    isRunning: false,
+    timer: 0
   }
 
   tick = () => {
-    if(this.state.isRunning){
-      this.setState(prevState => ({timer:prevState.timer +1}));
+    if (this.state.isRunning) {
+      this.setState(prevState => ({timer: prevState.timer +1}));
     }
   }
 
-  HandleReset = () =>{
-    this.setState({timer:0});
+  handleStopwatch = () => {
+    this.setState(prevState => ({isRunning: !prevState.isRunning}));
   }
 
-  HandleStopwatch = () => {
-    this.setState(prevState => ({isRunning: !prevState.isRunning}));
+  handleReset = () => {
+    this.setState({timer: 0});
   }
 
   render() {
     return (
       <div className="stopwatch">
-        <h2>StopWatch</h2>
+        <h2>Stopwatch</h2>
         <span className="stopwatch-time">{this.state.timer}</span>
-        <button onClick={this.HandleStopwatch}>{this.state.isRunning ? "stop" : "Start"}</button>
-        <button onClick={this.HandleReset}>Reset</button>
+        <button onClick={this.handleStopwatch}>{this.state.isRunning ? 'Stop' : 'Start'}</button>
+        <button onClick={this.handleReset}>Reset</button>
       </div>
     );
   }
 
-  // DOM이  렌더링 된 직후
+  // DOM이 렌더링된 직후
   componentDidMount() {
     this.tickRef = setInterval(this.tick, 1000);
   }
@@ -44,7 +42,4 @@ export class StopWatch extends React.Component {
   componentWillUnmount() {
     clearInterval(this.tickRef);
   }
-
-
 }
-
