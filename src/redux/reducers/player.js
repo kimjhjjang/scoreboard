@@ -1,51 +1,62 @@
-import {ADD_PLYAER, CHANGE_SCORE, REMOVE_PLAYER, UPDATE_TITLE} from "../actionTypes";
-import {AddPlayerForm} from "../../components/AddPlayerForm";
+import {ADD_PLAYER, CHANGE_SCORE, REMOVE_PLAYER, UPDATE_TITLE} from "./actionTypes";
 
-const initialState ={
-  title : 'Redux Score',
+let playerId = 4;
+
+const playerInitialState = {
+  title: 'My Scoreboard',
   players: [
     {name: 'LDK', score: 0, id: 1},
     {name: 'HONG', score: 0, id: 2},
     {name: 'KIM', score: 0, id: 3},
     {name: 'PARK', score: 0, id: 4},
   ]
-}
+};
 
-let playerId = 4;
+export const playerReducer = (state = playerInitialState, action) => {
+  let players;
+  switch(action.type) {
 
-export const playerReducer = (state = initialState, action) =>{
-  switch (action.type) {
-    case  UPDATE_TITLE:
+    case UPDATE_TITLE:
       return {
         ...state,
         title: action.title
-      }
-    case ADD_PLYAER:
+      };
+
+    case ADD_PLAYER:
       return {
         ...state,
-        players : [
-          state.players,
+        players: [
+          ...state.players,
           {
-            name : action.name,
-            score : 0,
-            id : ++playerId
+            name: action.name,
+            score: 0,
+            id: ++playerId
           }
         ]
-      }
+      };
+
     case CHANGE_SCORE:
-      state.players.forEach(player => {
-        if(player.id === action.index){
+      players = [...state.players];
+      players.forEach((player, index) => {
+        if (index === action.index) {
           player.score += action.delta;
         }
-      })
-      return{
+      });
+      return {
         ...state,
-        players: [
-          ...state.players
-        ]
-      }
-        default:
+        players
+      };
+
+    case REMOVE_PLAYER:
+      players = [...state.players];
+      let index = players.findIndex(player => player.id === action.id);
+      players.splice(index, 1);
+      return {
+        ...state,
+        players
+      };
+
+    default:
       return state;
   }
-}
-
+};

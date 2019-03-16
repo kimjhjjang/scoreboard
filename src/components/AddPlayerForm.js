@@ -30,4 +30,10 @@ class AddPlayerForm extends React.Component {
   }
 }
 
-export default connect(null,{addPlayer})(AddPlayerForm);
+let mapDispatchToProps = (dispatch) => {
+  return {
+    addPlayer: (name) => dispatch(addPlayer(name))
+  }
+}
+
+export default connect(null,mapDispatchToProps)(AddPlayerForm);

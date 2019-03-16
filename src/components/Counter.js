@@ -28,7 +28,7 @@ Counter.propTypes ={
   id: PropTypes.number,
   score : PropTypes.number,
   changeScore : PropTypes.func
-}
+};
 
 
 export default connect(null,{changeScore})(Counter);

@@ -1,7 +1,7 @@
 import React from "react";
 import './App.css';
 import Header from "./components/Header";
-import {Player} from "./components/Player";
+import Player from "./components/Player";
 import AddPlayerForm from "./components/AddPlayerForm";
 import {connect} from "react-redux";
 
@@ -10,7 +10,7 @@ class App extends React.Component {
 /*  handleRemovePlayer = (id) => {
     console.log(id);
     this.setState(prevState => ({
-      players: prevState.players.filter(item => item.id !== id)
+      players: prevState.players.changeScorefilter(item => item.id !== id)
     }))
   }*/
 
