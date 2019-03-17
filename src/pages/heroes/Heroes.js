@@ -35,7 +35,7 @@ export class Heroes extends React.Component {
 
         </div>
         <Pagination current={this.state.currentPage} total={this.state.totalCount} pageSize={this.state.pageSize}
-        onChange={this.handleChange}/>
+        onChange={this.handleChange} className="d-flex justify-content-center"/>
       </>
     );
   }
