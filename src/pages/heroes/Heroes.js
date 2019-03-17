@@ -1,31 +1,41 @@
-import React from "react";
+import React, {Fragment} from "react";
 import axios from "axios";
 import styles from './Heroes.module.scss';
+import Pagination from 'rc-pagination';
+import 'rc-pagination/dist/rc-pagination.css';
 
 export class Heroes extends React.Component {
   constructor(props) {
     super(props);  // 부모 속성 초기화해야됨.
 
     this.state = {
-      heroes:[]
+      pageSize: 10,
+      totalCount: 115,
+      currentPage: 1,
+      heroes: []
     }
   }
 
 
   render() {
     return (
-      <ul className={styles["img-box"]}>
-        {
-          this.state.heroes.map(hero => (
-            <li key={hero.hero_id} className="row align-items-center m-0">
-              <div className="col-1 py-2">
-                <img src={hero.photo ? hero.photo : process.env.PUBLIC_URL + '/images/baseline-face-24px.svg'} alt={hero.name} className="img-fluid rounded-circle"/>
+      <>
+        <div className="card-columns">
+          {this.state.heroes.map(hero => (
+            <div className="card" key={hero.hero_id}>
+              <img src={hero.photo ? hero.photo : process.env.PUBLIC_URL + '/images/baseline-face-24px.svg'}
+                   style={{width: '100%'}} alt={hero.name}></img>
+              <div className="card-body">
+                <h5 className="card-title">{hero.name}</h5>
+                <p className="card-text">email: {hero.email}</p>
+                <p className="card-text">sex: {hero.sex}</p>
               </div>
-              <span className="col">{hero.name}</span>
-            </li>
-          ))
-        }
-      </ul>
+            </div>
+          ))}
+
+        </div>
+        <Pagination current={this.state.currentPage} total={this.state.totalCount} pageSize={this.state.pageSize}/>
+      </>
     );
   }
 
@@ -34,7 +44,11 @@ export class Heroes extends React.Component {
     // Promise 패턴
     // await axios.get('http://eastflag.co.kr:8080/api/heroes')
     //   .then(res => this.setState({heroes:res.data}));
-    const res = await axios.get('http://eastflag.co.kr:8080/api/heroes');
+
+    const start_index= (this.state.currentPage-1) * this.state.pageSize;
+
+    const res = await axios.get(`http://eastflag.co.kr:8080/api/paged_heroes` +
+      `?start_index=${start_index}&page_size=${this.state.pageSize}`);
     this.setState({heroes:res.data});
   }
 
