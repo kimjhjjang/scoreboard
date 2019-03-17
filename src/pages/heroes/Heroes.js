@@ -34,9 +34,15 @@ export class Heroes extends React.Component {
           ))}
 
         </div>
-        <Pagination current={this.state.currentPage} total={this.state.totalCount} pageSize={this.state.pageSize}/>
+        <Pagination current={this.state.currentPage} total={this.state.totalCount} pageSize={this.state.pageSize}
+        onChange={this.handleChange}/>
       </>
     );
+  }
+
+  handleChange = (current, pageSize) => {
+    this.setState({currentPage : current});
+    this.getHeroes();
   }
 
   async getHeroes(){
@@ -47,9 +53,13 @@ export class Heroes extends React.Component {
 
     const start_index= (this.state.currentPage-1) * this.state.pageSize;
 
-    const res = await axios.get(`http://eastflag.co.kr:8080/api/paged_heroes` +
-      `?start_index=${start_index}&page_size=${this.state.pageSize}`);
-    this.setState({heroes:res.data});
+    const res = await axios.get(`http://eastflag.co.kr:8080/api/paged_heroes?` +
+      `start_index=${start_index}&page_size=${this.state.pageSize}`);
+
+    this.setState({
+      heroes:res.data.data,
+      totalCount : res.data.total
+    });
   }
 
   componentDidMount() {
