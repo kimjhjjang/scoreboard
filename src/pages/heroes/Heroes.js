@@ -1,8 +1,9 @@
-import React, {Fragment} from "react";
+import React from "react";
 import axios from "axios";
-import styles from './Heroes.module.scss';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/dist/rc-pagination.css';
+import {Hero} from "./Hero";
+import {Route, Switch} from "react-router-dom";
 
 export class Heroes extends React.Component {
   constructor(props) {
@@ -20,9 +21,13 @@ export class Heroes extends React.Component {
   render() {
     return (
       <>
+        <Switch>
+          <Route path="/heroes/hero/:hero_id" component={Hero}></Route>
+        </Switch>
+
         <div className="card-columns">
           {this.state.heroes.map(hero => (
-            <div className="card" key={hero.hero_id}>
+            <div className="card" key={hero.hero_id} onClick={() => this.props.history.push(`/heroes/hero/${hero.hero_id}`)}>
               <img src={hero.photo ? hero.photo : process.env.PUBLIC_URL + '/images/baseline-face-24px.svg'}
                    style={{width: '100%'}} alt={hero.name}></img>
               <div className="card-body">

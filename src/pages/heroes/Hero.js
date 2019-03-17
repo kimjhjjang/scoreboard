@@ -2,11 +2,13 @@ import React from "react";
 import axios from "axios";
 
 export class Hero extends React.Component {
+  hero_id;
+
   constructor(props) {
     super(props);  // 부모 속성 초기화해야됨.
 
     console.log(this.props);
-    this.state = {
+      this.state = {
       hero : null
     }
   }
@@ -46,15 +48,27 @@ export class Hero extends React.Component {
     );
   }
 
-  componentDidMount() {
-    this.getHero(this.props.match.params['hero_id']);
+  async getHero() {
+    const res = await axios.get(`http://eastflag.co.kr:8080/api/hero/${this.hero_id}`);
+
+    this.setState({hero: res.data});
   }
 
-  getHero = async (hero_id) => {
-    let response = await axios.get(`http://eastflag.co.kr:8080/api/hero/${hero_id}`);
-    console.log(response);
+  componentDidMount() {
+    // hero_id를 추출
+    this.hero_id = this.props.match.params.hero_id;
 
-    this.setState({hero: response.data});
+    // 서버에 api를 호출하여 hero 데이터 획득 후 상태 정보 갱신
+    this.getHero();
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    console.log(nextProps);
+
+    if (this.hero_id !== nextProps.match.params.hero_id) {
+      this.hero_id = nextProps.match.params.hero_id;
+      this.getHero();
+    }
   }
 
 }
