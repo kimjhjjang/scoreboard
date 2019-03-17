@@ -2,7 +2,6 @@ import React from "react";
 import {addPlayer} from "../redux/actions";
 import {connect} from "react-redux";
 
-
 class AddPlayerForm extends React.Component {
 
   textInput = React.createRef();

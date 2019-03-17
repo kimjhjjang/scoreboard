@@ -3,6 +3,7 @@ import Counter from "./Counter";
 import PropTypes from 'prop-types';
 import {removePlayer} from "../redux/actions";
 import {connect} from "react-redux";
+import styles from '../pages/scoreboard/Scoreboar.module.css';
 
 
 class Player extends React.Component {
@@ -21,11 +22,11 @@ class Player extends React.Component {
     const {removePlayer,name,score,id,changeScore} = this.props;
 
     return (
-      <div className="player">
-        <span className="player-name">
-          <button className="remove-player" onClick={() => removePlayer(id)}>X</button>
+      <div className={styles.player}>
+        <span className={styles["player-name"]}>
+          <button className={styles["remove-player"]} onClick={() => removePlayer(id)}>X</button>
         </span>
-        <span className="player-name">{name}</span>
+        <span className={styles["player-name"]}>{name}</span>
         {/*모든 props를 넘길려면 { ...props}*/}
         <Counter score={score}
                  id={id}

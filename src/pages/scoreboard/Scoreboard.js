@@ -1,22 +1,19 @@
 import React from "react";
-import './App.css';
-import Header from "./components/Header";
-import Player from "./components/Player";
-import AddPlayerForm from "./components/AddPlayerForm";
 import {connect} from "react-redux";
+import Player from "../../components/Player";
+import AddPlayerForm from "../../components/AddPlayerForm";
+import Header from "../../components/Header";
+import styles from './Scoreboar.module.css';
 
-class App extends React.Component {
+class Scoreboard extends React.Component {
+  constructor(props) {
+    super(props);  // 부모 속성 초기화해야됨.
+  }
 
-  /*  handleRemovePlayer = (id) => {
-      console.log(id);
-      this.setState(prevState => ({
-        players: prevState.players.filter(item => item.id !== id)
-      }))
-    }*/
 
   render() {
     return (
-      <div className="scoreboard">
+      <div className={styles.scoreboard}>
         <Header players={this.props.players} />
 
         {/*Players List*/}
@@ -29,7 +26,7 @@ class App extends React.Component {
         }
         <AddPlayerForm addPlayer={this.handleAddPlayer}/>
       </div>
-    )
+    );
   }
 }
 
@@ -37,4 +34,4 @@ let mapStateToProps = (state) => ({
   players: state.playerReducer.players
 })
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(Scoreboard);
