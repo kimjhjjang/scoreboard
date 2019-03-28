@@ -21,3 +21,4 @@ export const Statistics = (props) => {
     </table>
   );
 };
+
