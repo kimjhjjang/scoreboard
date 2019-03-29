@@ -1,10 +1,11 @@
 import React from "react";
 import {
-  Collapse, DropdownItem, DropdownMenu,
+  Collapse,
+  DropdownItem,
+  DropdownMenu,
   DropdownToggle,
   Nav,
   Navbar,
-  NavbarBrand,
   NavbarToggler,
   NavItem,
   UncontrolledDropdown

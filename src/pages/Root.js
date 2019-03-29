@@ -4,7 +4,7 @@ import {Home} from "./Home";
 import Scoreboard from "./scoreboard/Scoreboard";
 import {Menu} from "./Menu";
 import {Index} from "./heroes/Index";
-import Work from "./works/Work";
+import {SignRoute} from "./works/SignRoute";
 
 export class Root extends React.Component {
 
@@ -17,7 +17,7 @@ export class Root extends React.Component {
             <Route path="/" exact component={Home}/>
             <Route path="/heroes" component={Index}/>
             <Route path="/scoreboard" component={Scoreboard}/>
-            <Route path="/works" component={Work}/>
+            <Route path="/works" component={SignRoute}/>
           </Switch>
         </div>
       </BrowserRouter>

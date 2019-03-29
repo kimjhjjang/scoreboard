@@ -22,14 +22,14 @@ export class Heroes extends React.Component {
     return (
       <>
         <Switch>
-          <Route path="/heroes/hero/:hero_id" component={Hero}></Route>
+          <Route path="/heroes/hero/:hero_id" component={Hero}/>
         </Switch>
 
         <div className="card-columns">
           {this.state.heroes.map(hero => (
             <div className="card" key={hero.hero_id} onClick={() => this.props.history.push(`/heroes/hero/${hero.hero_id}`)}>
               <img src={hero.photo ? hero.photo : process.env.PUBLIC_URL + '/images/baseline-face-24px.svg'}
-                   style={{width: '100%'}} alt={hero.name}></img>
+                   style={{width: '100%'}} alt={hero.name}/>
               <div className="card-body">
                 <h5 className="card-title">{hero.name}</h5>
                 <p className="card-text">email: {hero.email}</p>

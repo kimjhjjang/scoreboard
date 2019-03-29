@@ -16,7 +16,6 @@ export class Users extends React.Component {
 
     const {idx,firstName, lastName, userName} = this.props;
 
-    console.log(this.props);
     return (
         <tr>
           <th scope="row">{idx}</th>
