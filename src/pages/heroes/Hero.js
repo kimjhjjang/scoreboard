@@ -40,7 +40,7 @@ export class Hero extends React.Component {
           <div className="form-group mt-1">
             <label htmlFor="power">Photo:</label>
             {
-              this.state.hero.photo ? <img src={this.state.hero.photo} alt={this.state.hero.name}></img> : ''
+              this.state.hero.photo ? <img src={this.state.hero.photo} alt={this.state.hero.name}/> : ''
             }
           </div>
         </div>
