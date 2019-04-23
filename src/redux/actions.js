@@ -1,4 +1,4 @@
-import {ADD_PLAYER, ADD_USER, CHANGE_SCORE, REMOVE_PLAYER, UPDATE_TITLE} from "./actionTypes";
+import {ADD_PLAYER, ADD_USER, BLOG_NEWS, CHANGE_SCORE, REMOVE_PLAYER, UPDATE_TITLE} from "./actionTypes";
 
 export const updateTitle = (title) => ({
   type : UPDATE_TITLE,
@@ -24,4 +24,8 @@ export const removePlayer = (id) => ({
 export const addUser = (name) => ({
   type : ADD_USER,
   name
+});
+
+export const blogNews = (title) => ({
+  type : BLOG_NEWS
 })

@@ -37,6 +37,9 @@ export class Menu extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
+                <NavLink to="/blog" className="nav-link">Blog</NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink to="/heroes" className="nav-link">Heroes</NavLink>
               </NavItem>
               <NavItem>

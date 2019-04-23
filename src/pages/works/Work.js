@@ -43,6 +43,6 @@ class Work extends React.Component {
 let mapStateToProps = (state) => ({
   users: state.workReducer.users
 
-})
+});
 
 export default connect(mapStateToProps)(Work);
